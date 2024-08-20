@@ -38,7 +38,17 @@ const TodoList = () => {
     setNewTodo("");
   };
   const toggleCompleted = (id) => {
-    alert(`Toggle Completed for todo with id: ${id}`);
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return {
+          id: todo.id,
+          text: todo.text,
+          completed: !todo.completed,
+        };
+      } else {
+        return todo;
+      }
+    });
   };
 
   return (
