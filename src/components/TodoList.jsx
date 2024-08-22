@@ -37,19 +37,29 @@ const TodoList = () => {
     setTodos([...todos, newTodos]);
     setNewTodo("");
   };
+  
   const toggleCompleted = (id) => {
     const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return {
-          id: todo.id,
-          text: todo.text,
-          completed: !todo.completed,
-        };
-      } else {
-        return todo;
-      }
-    });
-  };
+  //     if (todo.id === id) {
+  //       return {
+  //         id: todo.id,
+  //         text: todo.text,
+  //         completed: !todo.completed,
+  //       };
+  //     } else {
+  //       return todo;
+  //     }
+  //   });
+  // };
+const handleDelete = (id) => {
+ const filtertedTodos =todos.filter ((todo)=>{
+  if (todo.id === id) {
+    return false;
+  }
+  return true;
+ })
+ setTodos(filtertedTodos);
+    };
 
   return (
     <div>
@@ -69,6 +79,7 @@ const TodoList = () => {
             <p></p>
             {todo.text} - {String(todo.completed)}
             <button onClick={() => toggleCompleted(todo.id)}>완료</button>
+            <button onCLick= {(handleDelete(todo.id))}>삭제</button>
           </li>
         ))}
       </ul>
