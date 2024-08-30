@@ -20,6 +20,20 @@ const TodoContainer = () => {
     //input 태그의 값을 초기화 -> 정리
     setText("");
   };
+
+  const onToggleCompleted = (id) => {
+    const newTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          isCompleted: !todo.isCompleted,
+        };
+      }
+      return todo;
+    });
+    setTodos(newTodos);
+  };
+
   const onDelete = (id) => {
     const filteredTodos = todos.filter((todo) => {
       if (todo.id === id) {
@@ -44,7 +58,9 @@ const TodoContainer = () => {
         {todos.map((todo) => (
           <li key={todo.id}>
             {todo.text} {todo.isCompleted ? "완료" : "미완료"}
-            <button>{todo.isCompleted ? "취소" : "완료"}</button>
+            <button onClick={() => onToggleCompleted(todo.id)}>
+              {todo.isCompleted ? "취소" : "완료"}
+            </button>
             <button onClick={() => onDelete(todo.id)}>삭제</button>
           </li>
         ))}
